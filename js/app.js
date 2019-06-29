@@ -1,14 +1,26 @@
+const gameDataController = (function() {
+
+})();
+
+const UIController = (function() {
+
+})();
+
+const controller = (function(game, UI) {
+
+})(gameDataController, UIController);
+
 /*
  * Create a list that holds all of your cards
  */
-const diamond = '<li class="card"><i class="fa fa-diamond"></i></li>';
-const plane = '<li class="card"><i class="fa fa-paper-plane-o"></i></li>';
-const anchor = '<li class="card match"><i class="fa fa-anchor"></i></li>';
-const bolt = '<li class="card match"><i class="fa fa-anchor"></i></li>';
-const cube = '<li class="card"><i class="fa fa-cube"></i></li>';
-const leaf = '<li class="card"><i class="fa fa-leaf"></i></li>';
-const cycle = '<li class="card"><i class="fa fa-leaf"></i></li>';
-const bomb = '<li class="card"><i class="fa fa-bomb"></i></li>';  
+const diamond = '<li class="card" value="1"><i class="fa fa-diamond"></i></li>';
+const plane = '<li class="card" value="2"><i class="fa fa-paper-plane-o"></i></li>';
+const anchor = '<li class="card match" value="3"><i class="fa fa-anchor"></i></li>';
+const bolt = '<li class="card match" value="4"><i class="fa fa-anchor"></i></li>';
+const cube = '<li class="card" value="5"><i class="fa fa-cube"></i></li>';
+const leaf = '<li class="card" value="6"><i class="fa fa-leaf"></i></li>';
+const cycle = '<li class="card" value="7"><i class="fa fa-leaf"></i></li>';
+const bomb = '<li class="card" value="8"><i class="fa fa-bomb"></i></li>';  
 
 
 let arr = [diamond, plane, anchor, bolt, cube, leaf, cycle, bomb, diamond, plane, anchor, bolt, cube, leaf, cycle, bomb];
