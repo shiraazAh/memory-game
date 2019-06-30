@@ -1,29 +1,104 @@
-const gameDataController = (function() {
+// const gameDataController = (function() {
 
-})();
+//     let currentCard = [];
 
-const UIController = (function() {
+//     return {
+//         storeCardValue: function(evt) {
+//             currentCard.push(evt.target.id);
+//         },
+//         checkCurrent: function(array){
+//             if(array[0]===array[1]){
 
-})();
+//             }
+//         }
 
-const controller = (function(game, UI) {
+//     }
 
-})(gameDataController, UIController);
+// })();
+
+// const UIController = (function() {
+    
+// const diamond = '<li class="card" value="1"><i class="fa fa-diamond"></i></li>';
+// const plane = '<li class="card" value="2"><i class="fa fa-paper-plane-o"></i></li>';
+// const anchor = '<li class="card match" value="3"><i class="fa fa-anchor"></i></li>';
+// const bolt = '<li class="card match" value="4"><i class="fa fa-anchor"></i></li>';
+// const cube = '<li class="card" value="5"><i class="fa fa-cube"></i></li>';
+// const leaf = '<li class="card" value="6"><i class="fa fa-leaf"></i></li>';
+// const cycle = '<li class="card" value="7"><i class="fa fa-leaf"></i></li>';
+// const bomb = '<li class="card" value="8"><i class="fa fa-bomb"></i></li>';  
+
+
+// let arr = [diamond, plane, anchor, bolt, cube, leaf, cycle, bomb, diamond, plane, anchor, bolt, cube, leaf, cycle, bomb];
+
+// return {
+//     shuffle: function(array) {
+//         var currentIndex = array.length, temporaryValue, randomIndex;
+        
+//         while (currentIndex !== 0) {
+//             randomIndex = Math.floor(Math.random() * currentIndex);
+//             currentIndex -= 1;
+//             temporaryValue = array[currentIndex];
+//             array[currentIndex] = array[randomIndex];
+//             array[randomIndex] = temporaryValue;
+//         }
+    
+//         return array;
+//     },
+//     addCardToUI: function() {
+//         document.createElement('li')
+
+//         const ul = document.querySelector(".deck")
+
+//         for(i=0; i < arr.length; i++) {
+//             ul.insertAdjacentHTML('beforeend', arr[i]);
+//         };
+//     },
+//     openCard: function(evt) {
+//         evt.target.classList.add('open');
+//         evt.target.classList.add('show');
+//     }
+// }
+
+// })();
+
+// const controller = (function(game, UI) {
+
+//     // Display the cards on the page
+//     addCardToUI();
+//     // shuffle the list of cards using the provided "shuffle" method below
+//     shuffle(arr);
+//     // loop through each card and create its HTML
+//     // add each card's HTML to the page
+
+   
+
+// })(gameDataController, UIController);
 
 /*
  * Create a list that holds all of your cards
  */
-const diamond = '<li class="card" value="1"><i class="fa fa-diamond"></i></li>';
-const plane = '<li class="card" value="2"><i class="fa fa-paper-plane-o"></i></li>';
-const anchor = '<li class="card match" value="3"><i class="fa fa-anchor"></i></li>';
-const bolt = '<li class="card match" value="4"><i class="fa fa-anchor"></i></li>';
-const cube = '<li class="card" value="5"><i class="fa fa-cube"></i></li>';
-const leaf = '<li class="card" value="6"><i class="fa fa-leaf"></i></li>';
-const cycle = '<li class="card" value="7"><i class="fa fa-leaf"></i></li>';
-const bomb = '<li class="card" value="8"><i class="fa fa-bomb"></i></li>';  
+
+//  This is for UI
+const diamond = '<li class="card" id="1"><i class="fa fa-diamond"></i></li>';
+const plane = '<li class="card" id="2"><i class="fa fa-paper-plane-o"></i></li>';
+const anchor = '<li class="card match" id="3"><i class="fa fa-anchor"></i></li>';
+const bolt = '<li class="card match" id="4"><i class="fa fa-bolt"></i></li>';
+const cube = '<li class="card" id="5"><i class="fa fa-cube"></i></li>';
+const leaf = '<li class="card" id="6"><i class="fa fa-leaf"></i></li>';
+const cycle = '<li class="card" id="7"><i class="fa fa-bicycle"></i></li>';
+const bomb = '<li class="card" id="8"><i class="fa fa-bomb"></i></li>';  
+const diamond2 = '<li class="card" id="9"><i class="fa fa-diamond"></i></li>';
+const plane2 = '<li class="card" id="10"><i class="fa fa-paper-plane-o"></i></li>';
+const anchor2 = '<li class="card match" id="11"><i class="fa fa-anchor"></i></li>';
+const bolt2 = '<li class="card match" id="12"><i class="fa fa-bolt"></i></li>';
+const cube2= '<li class="card" id="13"><i class="fa fa-cube"></i></li>';
+const leaf2= '<li class="card" id="14"><i class="fa fa-leaf"></i></li>';
+const cycle2 = '<li class="card" id="15"><i class="fa fa-bicycle"></i></li>';
+const bomb2 = '<li class="card" id="16"><i class="fa fa-bomb"></i></li>'; 
 
 
-let arr = [diamond, plane, anchor, bolt, cube, leaf, cycle, bomb, diamond, plane, anchor, bolt, cube, leaf, cycle, bomb];
+
+let arr = [diamond, plane, anchor, bolt, cube, leaf, cycle, bomb, diamond2, plane2, anchor2, bolt2, cube2, leaf2, cycle2, bomb2];
 
 
 /*
@@ -68,10 +143,31 @@ for(i=0; i < arr.length; i++) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
-
  function openCard(evt){
-    evt.target.classList.toggle('open');
-    evt.target.classList.toggle('show');
+    evt.target.classList.add('open');
+    evt.target.classList.add('show');
  }
 
+ function storeCardValue(evt) {
+    currentCardClass.push(evt.target.firstChild.classList[1]);
+    currentCard.push(evt.target.id);
+    console.log(currentCard);
+ }
+
+ // This is for controller
 document.querySelector(".deck").addEventListener('click', openCard);
+document.querySelector(".deck").addEventListener('click', storeCardValue);
+document.querySelector(".deck").addEventListener('click', checkCurrent);
+
+// THis is for game
+function checkCurrent(){
+    if(currentCardClass[0]===currentCardClass[1]){
+        document.getElementById(currentCard[0]).classList.remove('open');
+        document.getElementById(currentCard[1]).classList.remove('open');
+    }
+};
+let currentCard = [];
+let currentCardClass = [];
+
+
+
