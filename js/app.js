@@ -1,14 +1,16 @@
 // const gameDataController = (function() {
 
 //     let currentCard = [];
+//     let currentCardClass = [];
 
 //     return {
 //         storeCardValue: function(evt) {
 //             currentCard.push(evt.target.id);
 //         },
-//         checkCurrent: function(array){
-//             if(array[0]===array[1]){
-
+//         checkCurrent: function(){
+//             if(currentCardClass[0]===currentCardClass[1]){
+//                 document.getElementById(currentCard[0]).classList.remove('open');
+//                 document.getElementById(currentCard[1]).classList.remove('open');
 //             }
 //         }
 
@@ -56,6 +58,9 @@
 //     openCard: function(evt) {
 //         evt.target.classList.add('open');
 //         evt.target.classList.add('show');
+//     },
+//     getArray: function() {
+//         return arr;
 //     }
 // }
 
@@ -66,11 +71,26 @@
 //     // Display the cards on the page
 //     addCardToUI();
 //     // shuffle the list of cards using the provided "shuffle" method below
-//     shuffle(arr);
-//     // loop through each card and create its HTML
-//     // add each card's HTML to the page
+//     shuffle(UI.getArray);
+//     // loop through each card and create its HTML and add each card's HTML to the page
+//     addCardToUI();
 
-   
+//     document.querySelector(".deck").addEventListener('click', addStuff);
+// document.querySelector(".deck").addEventListener('click', openCard);
+// document.querySelector(".deck").addEventListener('click', storeCardValue);
+// document.querySelector(".deck").addEventListener('click', checkCurrent);
+
+// function addStuff() {
+// //  set up the event listener for a card. If a card is clicked:
+// //    - display the card's symbol (put this functionality in another function that you call from this one)
+// //    - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
+// //    - if the list already has another card, check to see if the two cards match
+// //      + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
+// //      + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
+// //      + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
+// //      + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
+// }
+ 
 
 // })(gameDataController, UIController);
 
