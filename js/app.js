@@ -61,38 +61,63 @@
 //     },
 //     getArray: function() {
 //         return arr;
+//     },
+//     storeCardValue: function() {
+//         currentCardClass.push(evt.target.firstChild.classList[1]);
+//         currentCard.push(evt.target.id);
+//         console.log(currentCard);
+//     },
+//     checkCurrent: function() {
+//         if(currentCardClass[0]===currentCardClass[1]){
+//             document.getElementById(currentCard[0]).classList.remove('open');
+//             document.getElementById(currentCard[1]).classList.remove('open');
+//         }
 //     }
+
 // }
 
 // })();
 
 // const controller = (function(game, UI) {
 
-//     // Display the cards on the page
-//     addCardToUI();
-//     // shuffle the list of cards using the provided "shuffle" method below
-//     shuffle(UI.getArray);
-//     // loop through each card and create its HTML and add each card's HTML to the page
-//     addCardToUI();
+// const setCards = function (){
 
+//         // shuffle the list of cards using the provided "shuffle" method below
+//         UI.shuffle(UI.getArray);
+//         // Display the cards on the page and loop through each card and create its HTML and add each card's HTML to the page
+//         UI.addCardToUI();
+// }
+
+// const setEventListeners = function() {
 //     document.querySelector(".deck").addEventListener('click', addStuff);
-// document.querySelector(".deck").addEventListener('click', openCard);
-// document.querySelector(".deck").addEventListener('click', storeCardValue);
-// document.querySelector(".deck").addEventListener('click', checkCurrent);
+// }
 
-// function addStuff() {
+// const addStuff = function() {
 // //  set up the event listener for a card. If a card is clicked:
 // //    - display the card's symbol (put this functionality in another function that you call from this one)
+//     UI.openCard();
 // //    - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
+//     UI.storeCardValue();
 // //    - if the list already has another card, check to see if the two cards match
+//     UI.checkCurrent();
 // //      + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
 // //      + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
 // //      + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
 // //      + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
 // }
+
+// return {
+//     init: function() {
+//         console.log("Game Has started")
+//         setCards();
+//         setEventListeners();
+//     }
+// }
  
 
 // })(gameDataController, UIController);
+
+// controller.init();
 
 /*
  * Create a list that holds all of your cards
@@ -174,19 +199,46 @@ for(i=0; i < arr.length; i++) {
     console.log(currentCard);
  }
 
+ var clicks = 0; // counter 
+ var a = document.querySelector(".deck"); // element
+ a.onclick = function(b) { // onclick not onClick
+   console.log(++clicks); // increment it
+ }
+
  // This is for controller
 document.querySelector(".deck").addEventListener('click', openCard);
 document.querySelector(".deck").addEventListener('click', storeCardValue);
 document.querySelector(".deck").addEventListener('click', checkCurrent);
 
 // THis is for game
+function match() {
+    document.getElementById(currentCard[0]).classList.remove('open');
+    document.getElementById(currentCard[1]).classList.remove('open');
+    document.getElementById(currentCard[0]).classList.remove('show');
+    document.getElementById(currentCard[1]).classList.remove('show');
+    document.getElementById(currentCard[1]).classList.add('match');
+    document.getElementById(currentCard[0]).classList.add('match');
+}
+
+function notMatch() {
+    document.getElementById(currentCard[0]).classList.remove('open');
+    document.getElementById(currentCard[1]).classList.remove('open');
+    document.getElementById(currentCard[0]).classList.remove('show');
+    document.getElementById(currentCard[1]).classList.remove('show')
+    currentCardClass.pop();
+    currentCardClass.shift();
+    currentCard.pop();
+    currentCard.shift();
+}
 function checkCurrent(){
     if(currentCardClass[0]===currentCardClass[1]){
-        document.getElementById(currentCard[0]).classList.remove('open');
-        document.getElementById(currentCard[1]).classList.remove('open');
+        match();
+    } else if(clicks == 2 && currentCardClass[0]!==currentCardClass[1]) {
+        notMatch();
     }
-};
-let currentCard = [];
+}
+
+let currentCard = []; 
 let currentCardClass = [];
 
 
