@@ -45,7 +45,7 @@ const gameDataController = (function() {
                 if(currentCardClass[0]===currentCardClass[1]){
                     matchCard();
                 } else if(clicks == 2 && currentCardClass[0]!==currentCardClass[1]) {
-                    notMatchCard();
+                    setTimeout(notMatchCard, 1000);
                 }
         }
 
