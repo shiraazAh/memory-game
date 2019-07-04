@@ -9,6 +9,8 @@ const gameDataController = (function() {
       ++clicks; // increment it
     }
 
+    
+
     function matchCard() {
         document.getElementById(currentCard[0]).classList.remove('open');
         document.getElementById(currentCard[1]).classList.remove('open');
@@ -20,7 +22,6 @@ const gameDataController = (function() {
         currentCardClass.shift();
         currentCard.pop();
         currentCard.shift();
-        clicks = 0;
     }
 
     function notMatchCard() {
@@ -32,7 +33,6 @@ const gameDataController = (function() {
         currentCardClass.shift();
         currentCard.pop();
         currentCard.shift();
-        clicks = 0;
     }
 
     return {
@@ -44,9 +44,12 @@ const gameDataController = (function() {
         checkCurrent: function() {
                 if(currentCardClass[0]===currentCardClass[1]){
                     matchCard();
-                } else if(clicks == 2 && currentCardClass[0]!==currentCardClass[1]) {
+                } else if(clicks%2 == 0 && currentCardClass[0]!==currentCardClass[1]) {
                     setTimeout(notMatchCard, 1000);
                 }
+        },
+        moveCounter: function() {
+            document.querySelector(".moves").textContent = clicks;
         }
 
     }
@@ -73,6 +76,7 @@ const UIController = (function() {
     const bomb2 = '<li class="card" id="16"><i class="fa fa-bomb"></i></li>'; 
 
 let arr = [diamond, plane, anchor, bolt, cube, leaf, cycle, bomb, diamond2, plane2, anchor2, bolt2, cube2, leaf2, cycle2, bomb2];
+
 return {
     shuffle: function(array) {
         var currentIndex = array.length, temporaryValue, randomIndex;
@@ -134,6 +138,7 @@ const addStuff = function(evt) {
 //      + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
 //      + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
 //      + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
+    game.moveCounter();
 //      + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
 }
 
