@@ -59,6 +59,18 @@ const gameDataController = (function() {
             if(matchedCards === 16) {
                 alert("you win the game" + sec + min);
             }
+        },
+        startTimer: function() {
+            let sec = 0;
+            let min = 0;
+            window.setInterval(function () {
+                "use strict";
+                sec++;
+                if (sec > 59) {
+                    sec = 0;
+                    min++;
+                }
+            }, 1000)
         }
 
     }
@@ -133,19 +145,6 @@ const setCards = function (){
 }
 
 const setEventListeners = function() {
-    let sec = 0;
-    let min = 0;
-    document.querySelector(".deck").addEventListener('click', function() {
-        window.setInterval(function () {
-            "use strict";
-            sec++;
-            if (sec > 59) {
-                sec = 0;
-                min++;
-            }
-            console.log(sec);
-        }, 1000)
-    });
     document.querySelector(".deck").addEventListener('click', addStuff);
     // document.querySelector(".deck").addEventListener('click', game.checkCurrent);
 }
@@ -172,6 +171,7 @@ return {
         console.log("Game Has started")
         setCards();
         setEventListeners();
+        game.startTimer();
     }
 }
  
