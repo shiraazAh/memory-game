@@ -2,7 +2,6 @@ const gameDataController = (function() {
 
     let currentCard = [];
     let currentCardClass = [];
-
     let clicks = 0; // counter 
     const a = document.querySelector(".deck"); // element
     a.onclick = function(b) { // onclick not onClick
@@ -49,11 +48,16 @@ const gameDataController = (function() {
         moveCounter: function() {
             document.querySelector(".moves").textContent = clicks;
         },
+        moveStars: function() {
+            if(clicks == 26 || clicks == 36 || clicks == 44){
+                document.querySelector(".stars").getElementsByTagName('li')[0].remove();
+            }
+        },
         winGame: function() {
             let matchedCards = document.querySelectorAll(".match").length;
             console.log(matchedCards)
             if(matchedCards === 16) {
-                alert("you win the game");
+                alert("you win the game" + sec + min);
             }
         }
 
@@ -65,16 +69,16 @@ const UIController = (function() {
     
     const diamond = '<li class="card" id="1"><i class="fa fa-diamond"></i></li>';
     const plane = '<li class="card" id="2"><i class="fa fa-paper-plane-o"></i></li>';
-    const anchor = '<li class="card match" id="3"><i class="fa fa-anchor"></i></li>';
-    const bolt = '<li class="card match" id="4"><i class="fa fa-bolt"></i></li>';
+    const anchor = '<li class="card" id="3"><i class="fa fa-anchor"></i></li>';
+    const bolt = '<li class="card" id="4"><i class="fa fa-bolt"></i></li>';
     const cube = '<li class="card" id="5"><i class="fa fa-cube"></i></li>';
     const leaf = '<li class="card" id="6"><i class="fa fa-leaf"></i></li>';
     const cycle = '<li class="card" id="7"><i class="fa fa-bicycle"></i></li>';
     const bomb = '<li class="card" id="8"><i class="fa fa-bomb"></i></li>';  
     const diamond2 = '<li class="card" id="9"><i class="fa fa-diamond"></i></li>';
     const plane2 = '<li class="card" id="10"><i class="fa fa-paper-plane-o"></i></li>';
-    const anchor2 = '<li class="card match" id="11"><i class="fa fa-anchor"></i></li>';
-    const bolt2 = '<li class="card match" id="12"><i class="fa fa-bolt"></i></li>';
+    const anchor2 = '<li class="card" id="11"><i class="fa fa-anchor"></i></li>';
+    const bolt2 = '<li class="card" id="12"><i class="fa fa-bolt"></i></li>';
     const cube2= '<li class="card" id="13"><i class="fa fa-cube"></i></li>';
     const leaf2= '<li class="card" id="14"><i class="fa fa-leaf"></i></li>';
     const cycle2 = '<li class="card" id="15"><i class="fa fa-bicycle"></i></li>';
@@ -129,6 +133,19 @@ const setCards = function (){
 }
 
 const setEventListeners = function() {
+    let sec = 0;
+    let min = 0;
+    document.querySelector(".deck").addEventListener('click', function() {
+        window.setInterval(function () {
+            "use strict";
+            sec++;
+            if (sec > 59) {
+                sec = 0;
+                min++;
+            }
+            console.log(sec);
+        }, 1000)
+    });
     document.querySelector(".deck").addEventListener('click', addStuff);
     // document.querySelector(".deck").addEventListener('click', game.checkCurrent);
 }
@@ -145,6 +162,7 @@ const addStuff = function(evt) {
     game.checkCurrent();
 //      + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
     game.moveCounter();
+    game.moveStars();
 //      + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
     game.winGame();
 }
@@ -162,6 +180,12 @@ return {
 
 controller.init();
 
+//restart game
+const f = document.querySelector('.restart')
+
+f.onclick = function(b) {
+    document.location.reload()
+}
 // /*
 //  * Create a list that holds all of your cards
 //  */
