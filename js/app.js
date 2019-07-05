@@ -9,8 +9,6 @@ const gameDataController = (function() {
       ++clicks; // increment it
     }
 
-    
-
     function matchCard() {
         document.getElementById(currentCard[0]).classList.remove('open');
         document.getElementById(currentCard[1]).classList.remove('open');
@@ -50,6 +48,13 @@ const gameDataController = (function() {
         },
         moveCounter: function() {
             document.querySelector(".moves").textContent = clicks;
+        },
+        winGame: function() {
+            let matchedCards = document.querySelectorAll(".match").length;
+            console.log(matchedCards)
+            if(matchedCards === 16) {
+                alert("you win the game");
+            }
         }
 
     }
@@ -125,7 +130,7 @@ const setCards = function (){
 
 const setEventListeners = function() {
     document.querySelector(".deck").addEventListener('click', addStuff);
-    document.querySelector(".deck").addEventListener('click', game.checkCurrent);
+    // document.querySelector(".deck").addEventListener('click', game.checkCurrent);
 }
 
 const addStuff = function(evt) {
@@ -137,9 +142,11 @@ const addStuff = function(evt) {
 //    - if the list already has another card, check to see if the two cards match
 //      + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
 //      + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
+    game.checkCurrent();
 //      + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
     game.moveCounter();
 //      + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
+    game.winGame();
 }
 
 return {
