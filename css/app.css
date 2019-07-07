@@ -107,3 +107,14 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+.modal {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    display: none
+}
+
+.stars-2 li{
+    list-style: none;
+    display: inline-block;
+}
