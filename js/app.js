@@ -2,10 +2,19 @@ const gameDataController = (function() {
 
     let currentCard = [];
     let currentCardClass = [];
+    let sec = 0;
+    let min = 0;
     let clicks = 0; // counter 
     const a = document.querySelector(".deck"); // element
     a.onclick = function(b) { // onclick not onClick
       ++clicks; // increment it
+    }
+    
+    function avoid() {
+        currentCardClass.pop();
+        currentCardClass.shift();
+        currentCard.pop();
+        currentCard.shift();
     }
 
     function matchCard() {
@@ -22,6 +31,8 @@ const gameDataController = (function() {
     }
 
     function notMatchCard() {
+        document.getElementById(currentCard[0]).style.pointerEvents="auto";
+        document.getElementById(currentCard[1]).style.pointerEvents="auto";
         document.getElementById(currentCard[0]).classList.remove('open');
         document.getElementById(currentCard[1]).classList.remove('open');
         document.getElementById(currentCard[0]).classList.remove('show');
@@ -35,13 +46,17 @@ const gameDataController = (function() {
     return {
         storeCardValue: function(evt) {
             currentCardClass.push(evt.target.firstChild.classList[1]);
+            evt.target.style.pointerEvents="none";
             currentCard.push(evt.target.id);
             console.log(currentCard);
+            console.log(currentCardClass);
         },
         checkCurrent: function() {
-                if(currentCardClass[0]===currentCardClass[1]){
+            let matchedCards = document.querySelectorAll(".match").length;
+                if(currentCardClass[0]===currentCardClass[1] && currentCard[0] !== currentCard[1]){
                     matchCard();
-                } else if(clicks%2 == 0 && currentCardClass[0]!==currentCardClass[1]) {
+                }
+                 else if(clicks%2 == 0 && currentCardClass[0]!==currentCardClass[1]) {
                     setTimeout(notMatchCard, 1000);
                 }
         },
@@ -57,12 +72,10 @@ const gameDataController = (function() {
             let matchedCards = document.querySelectorAll(".match").length;
             console.log(matchedCards)
             if(matchedCards === 16) {
-                alert("you win the game" + sec + min);
+                alert("You win the game in " + sec + "Seconds and " + min + " Minutes");
             }
         },
         startTimer: function() {
-            let sec = 0;
-            let min = 0;
             window.setInterval(function () {
                 "use strict";
                 sec++;
@@ -71,6 +84,9 @@ const gameDataController = (function() {
                     min++;
                 }
             }, 1000)
+        },
+        getClicks: function() {
+            return clicks;
         }
 
     }
@@ -145,8 +161,18 @@ const setCards = function (){
 }
 
 const setEventListeners = function() {
-    document.querySelector(".deck").addEventListener('click', addStuff);
-    // document.querySelector(".deck").addEventListener('click', game.checkCurrent);
+    let clicks = 0; // counter 
+ // element
+    document.querySelector(".deck").addEventListener('click', function(b) { // onclick not onClick
+      ++clicks; // increment it
+      console.log(clicks);
+    })
+
+    document.querySelector(".deck").addEventListener('click', addStuff, false)
+
+    document.querySelector(".deck").addEventListener('click', function() {
+        console.log(clicks);
+    });
 }
 
 const addStuff = function(evt) {
@@ -171,6 +197,7 @@ return {
         console.log("Game Has started")
         setCards();
         setEventListeners();
+        //Timer starts
         game.startTimer();
     }
 }
