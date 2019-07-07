@@ -33,6 +33,7 @@ const gameDataController = (function() {
     function notMatchCard() {
         document.getElementById(currentCard[0]).style.pointerEvents="auto";
         document.getElementById(currentCard[1]).style.pointerEvents="auto";
+        document.querySelector(".deck").style.pointerEvents="auto"
         document.getElementById(currentCard[0]).classList.remove('open');
         document.getElementById(currentCard[1]).classList.remove('open');
         document.getElementById(currentCard[0]).classList.remove('show');
@@ -56,7 +57,8 @@ const gameDataController = (function() {
                 if(currentCardClass[0]===currentCardClass[1] && currentCard[0] !== currentCard[1]){
                     matchCard();
                 }
-                 else if(clicks%2 == 0 && currentCardClass[0]!==currentCardClass[1]) {
+                 else if(document.getElementById(currentCard[0]).classList.contains('open') && document.getElementById(currentCard[1]).classList.contains('open') && currentCardClass[0]!==currentCardClass[1]) {
+                    this.ifTwoCards();
                     setTimeout(notMatchCard, 1000);
                 }
         },
@@ -85,8 +87,8 @@ const gameDataController = (function() {
                 }
             }, 1000)
         },
-        getClicks: function() {
-            return clicks;
+        ifTwoCards: function() {
+            document.querySelector(".deck").style.pointerEvents="none";
         }
 
     }
@@ -168,7 +170,7 @@ const setEventListeners = function() {
       console.log(clicks);
     })
 
-    document.querySelector(".deck").addEventListener('click', addStuff, false)
+    document.querySelector(".deck").addEventListener('click', addStuff)
 
     document.querySelector(".deck").addEventListener('click', function() {
         console.log(clicks);
