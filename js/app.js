@@ -58,7 +58,7 @@ const gameDataController = (function() {
                 }
                  else if(currentCard.length > 1 && document.getElementById(currentCard[0]).classList.contains('open') && document.getElementById(currentCard[1]).classList.contains('open') && currentCardClass[0]!==currentCardClass[1]) {
                     this.ifTwoCards();
-                    setTimeout(notMatchCard, 1000);
+                    setTimeout(notMatchCard, 500);
                 }
         },
         moveCounter: function() {
@@ -68,7 +68,7 @@ const gameDataController = (function() {
             document.querySelector(".moves").textContent = moves;
         },
         moveStars: function() {
-            if(moves == 26 || moves == 36 || moves == 44){
+            if(currentCard.length > 1 && (moves == 8 || moves == 16) ){
                 document.querySelector(".stars").getElementsByTagName('li')[0].remove();
             }
         },
@@ -78,17 +78,16 @@ const gameDataController = (function() {
             if(matchedCards === 16) {
                 this.loopAndNone();
                 this.modalStyle();
+                document.getElementById('timer').display = "none";
             }
         },
         startTimer: function() {
-            window.setInterval(function () {
-                "use strict";
                 sec++;
                 if (sec > 59) {
                     sec = 0;
                     min++;
                 }
-            }, 1000)
+                document.getElementById('timer').textContent = min + ":" + sec;
         },
         ifTwoCards: function() {
             document.querySelector(".deck").style.pointerEvents="none";
@@ -102,9 +101,9 @@ const gameDataController = (function() {
 
         },
         loopAndNone: function() {
-            var divsToHide = document.getElementsByClassName("card"); //divsToHide is an array
-            for(var i = 0; i < divsToHide.length; i++){// or
-                divsToHide[i].style.display = "none"; // depending on what you're doing
+            var cardsToHide = document.getElementsByClassName("card"); //divsToHide is an array
+            for(var i = 0; i < cardsToHide.length; i++){// or
+                cardsToHide[i].style.display = "none"; // depending on what you're doing
             }
         }
 
@@ -217,7 +216,7 @@ return {
         setCards();
         setEventListeners();
         //Timer starts
-        game.startTimer();
+        setInterval(game.startTimer, 1000);
     }
 }
  
