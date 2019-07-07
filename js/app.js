@@ -54,11 +54,11 @@ const gameDataController = (function() {
             console.log(currentCardClass);
         },
         checkCurrent: function() {
-            let matchedCards = document.querySelectorAll(".match").length;
+            
                 if(currentCardClass[0]===currentCardClass[1] && currentCard[0] !== currentCard[1]){
                     matchCard();
                 }
-                 else if(document.getElementById(currentCard[0]).classList.contains('open') && document.getElementById(currentCard[1]).classList.contains('open') && currentCardClass[0]!==currentCardClass[1]) {
+                 else if(currentCard.length > 1 && document.getElementById(currentCard[0]).classList.contains('open') && document.getElementById(currentCard[1]).classList.contains('open') && currentCardClass[0]!==currentCardClass[1]) {
                     this.ifTwoCards();
                     setTimeout(notMatchCard, 1000);
                 }
