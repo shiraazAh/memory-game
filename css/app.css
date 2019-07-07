@@ -124,3 +124,14 @@ h1 {
     list-style: none;
     display: inline-block;
 }
+
+#timer {
+    margin-left: 60px;
+}
+
+.modal h1,
+h2,
+h3,
+.stars-2 {
+    text-align: center;
+}
