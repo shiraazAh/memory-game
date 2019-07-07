@@ -47,6 +47,7 @@ const gameDataController = (function() {
     return {
         storeCardValue: function(evt) {
             currentCardClass.push(evt.target.firstChild.classList[1]);
+            //To avoid double clicking the card
             evt.target.style.pointerEvents="none";
             currentCard.push(evt.target.id);
             console.log(currentCard);
@@ -74,7 +75,8 @@ const gameDataController = (function() {
             let matchedCards = document.querySelectorAll(".match").length;
             console.log(matchedCards)
             if(matchedCards === 16) {
-                alert("You win the game in " + sec + "Seconds and " + min + " Minutes");
+                this.loopAndNone();
+                this.modalStyle();
             }
         },
         startTimer: function() {
@@ -89,6 +91,18 @@ const gameDataController = (function() {
         },
         ifTwoCards: function() {
             document.querySelector(".deck").style.pointerEvents="none";
+        },
+        modalStyle: function() {
+            document.querySelector(".deck").style.justifyContent = "center";
+            document.querySelector(".modal").style.display = "block";
+            document.querySelector(".timer").textContent = min + " Minutes And " + sec + " Seconds";
+
+        },
+        loopAndNone: function() {
+            var divsToHide = document.getElementsByClassName("card"); //divsToHide is an array
+            for(var i = 0; i < divsToHide.length; i++){// or
+                divsToHide[i].style.display = "none"; // depending on what you're doing
+            }
         }
 
     }
