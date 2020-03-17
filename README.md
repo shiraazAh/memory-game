@@ -3,7 +3,7 @@
 ## Table of Contents
 
 * [Instructions](#instructions)
-* [Play]: https://shiraazah.github.io/memory-game/.
+* [Play](https://shiraazah.github.io/memory-game/)
 
 ## Instructions
 
