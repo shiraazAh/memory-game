@@ -7,4 +7,4 @@
 
 ## Instructions
 
-You have to match all pairs of cards as fast as possible in the lowest number of moves.
+Your main objective is to have to match all pairs of cards as fast as possible in the lowest number of moves.
